@@ -1,0 +1,445 @@
+/* River Arun Tidal Guide — style.css */
+
+:root {
+  --navy: #1b2a4a;
+  --navy-light: #2c3e6b;
+  --teal: #1a7a8a;
+  --teal-light: #e6f4f6;
+  --amber: #c67a00;
+  --amber-light: #fff3e0;
+  --amber-bg: #fef0d5;
+  --green: #3a7a52;
+  --green-light: #e8f5e9;
+  --salt: #1a7a8a;
+  --transitional: #5c6b8a;
+  --salt-wedge: #7a5a8a;
+  --fresh: #3a7a52;
+  --bg: #fafaf7;
+  --card-bg: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #5a5a5a;
+  --border: #d8d8d0;
+  --shadow: rgba(0, 0, 0, 0.08);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Header */
+
+.site-header {
+  background: var(--navy);
+  color: #fff;
+  padding: 1.25rem 1rem 1rem;
+}
+
+.site-header h1 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.15rem;
+}
+
+.site-header .subtitle {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  font-weight: 400;
+}
+
+/* Main container */
+
+main {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0 0.75rem 2rem;
+}
+
+/* Section headings */
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 1.5rem 0 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--navy);
+}
+
+/* Today's tide panel */
+
+.tide-panel {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-top: 1rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px var(--shadow);
+}
+
+.tide-panel-header {
+  background: var(--teal);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tide-panel-header .date {
+  font-weight: 400;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.tide-panel-body {
+  padding: 1rem;
+}
+
+.tide-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--teal-light);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--teal);
+}
+
+.tide-status .arrow {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.tide-times {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tide-event {
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.tide-event .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.tide-event .time {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.tide-event .height {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.tide-event.hw {
+  background: #eef4ff;
+}
+
+.tide-event.lw {
+  background: #f5f5f2;
+}
+
+.upstream-window {
+  padding: 0.65rem 0.85rem;
+  background: var(--amber-light);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 0.75rem;
+}
+
+.upstream-window .window-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--amber);
+  margin-bottom: 0.2rem;
+}
+
+.upstream-window .window-times {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.upstream-window .window-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.tide-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 0.5rem 0.65rem;
+  background: #f7f7f5;
+  border-radius: 4px;
+  line-height: 1.45;
+}
+
+.tide-loading,
+.tide-error {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.tide-error {
+  color: #b33;
+}
+
+/* Waypoint cards */
+
+.waypoint-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.waypoint-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px var(--shadow);
+}
+
+.waypoint-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.waypoint-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--navy);
+  flex: 1;
+  min-width: 0;
+}
+
+.zone-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.zone-badge.salt { background: var(--salt); }
+.zone-badge.transitional { background: var(--transitional); }
+.zone-badge.salt-wedge { background: var(--salt-wedge); }
+.zone-badge.fresh { background: var(--fresh); }
+
+.springs-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  background: var(--amber);
+  color: #fff;
+  white-space: nowrap;
+}
+
+.waypoint-body {
+  padding: 0.65rem 0.85rem;
+}
+
+.waypoint-hw {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--teal);
+  margin-bottom: 0.35rem;
+}
+
+.waypoint-hw .approx {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.waypoint-note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 0.35rem;
+}
+
+.waypoint-access {
+  margin-top: 0.35rem;
+}
+
+.access-item {
+  font-size: 0.82rem;
+  padding: 0.2rem 0;
+}
+
+.access-item .venue {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.access-item .phone {
+  color: var(--teal);
+}
+
+.access-item .phone a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.harbourmaster-flag {
+  font-size: 0.75rem;
+  color: var(--navy-light);
+  font-weight: 600;
+}
+
+/* Reference cards */
+
+.reference-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.ref-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.85rem;
+  box-shadow: 0 1px 3px var(--shadow);
+}
+
+.ref-card h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.4rem;
+}
+
+.ref-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.ref-card .stat {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ref-card .warning {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+/* Footer */
+
+.site-footer {
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 1.25rem 1rem;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  margin-top: 2rem;
+}
+
+.site-footer strong {
+  color: #fff;
+}
+
+.site-footer a {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.footer-inner {
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+/* Desktop enhancements */
+
+@media (min-width: 640px) {
+  .site-header {
+    padding: 1.5rem 2rem;
+  }
+
+  .site-header h1 {
+    font-size: 1.6rem;
+  }
+
+  main {
+    padding: 0 1.5rem 3rem;
+  }
+
+  .tide-times {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .reference-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .waypoint-card {
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) 2fr;
+  }
+
+  .waypoint-header {
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .site-footer {
+    padding: 1.5rem 2rem;
+  }
+}

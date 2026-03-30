@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tidal planning guide for the River Arun from Littlehampton to Pallingham Quay. Live tide times, waypoint lags, and river reference data for paddlers and small craft.">
+  <title>River Arun Tidal Guide</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <h1>River Arun Tidal Guide</h1>
+    <div class="subtitle">Littlehampton to Pallingham Quay &mdash; 19 miles</div>
+  </header>
+
+  <main>
+
+    <!-- Today's tide panel -->
+    <div class="tide-panel">
+      <div class="tide-panel-header">
+        <span>Today&rsquo;s Tides &mdash; Littlehampton</span>
+        <span class="date" id="tide-date"></span>
+      </div>
+      <div class="tide-panel-body" id="tide-panel-body">
+        <div class="tide-loading">Loading&hellip;</div>
+      </div>
+    </div>
+
+    <!-- Waypoints -->
+    <h2 class="section-title">Waypoints &amp; Tidal Lags</h2>
+    <div class="waypoint-list" id="waypoint-list"></div>
+
+    <!-- Reference -->
+    <h2 class="section-title">Know Your River</h2>
+    <div class="reference-grid" id="reference-grid"></div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p><strong>Not for navigation.</strong> All times are predictions and do not account for weather, surge, or river conditions. Tidal lags are approximate and vary with rainfall, spring/neap cycle, and river levels. Verify against official sources before going afloat.</p>
+      <p style="margin-top:0.5rem"><strong>Harbourmaster:</strong> <a href="tel:01903721215">01903 721215</a> / VHF Ch&nbsp;71</p>
+      <p style="margin-top:0.5rem">Contains ADMIRALTY&reg; tidal data: &copy; Crown copyright and database right.</p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
