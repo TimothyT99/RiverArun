@@ -39,7 +39,7 @@
   }
 
   async function fetchTides() {
-    const stationId = (typeof STATION_ID !== "undefined") ? STATION_ID : "0137A";
+    const stationId = (typeof STATION_ID !== "undefined") ? STATION_ID : "0074";
     let res;
 
     if (isNetlify()) {
@@ -324,11 +324,12 @@
 
     try {
       let events;
-      if (typeof API_KEY === "undefined" || API_KEY === "YOUR_API_KEY_HERE") {
+      const hasLocalKey = typeof API_KEY !== "undefined" && API_KEY !== "YOUR_API_KEY_HERE";
+      if (!hasLocalKey && !isNetlify()) {
+        // No API key and not on Netlify — show demo
         events = generateFallbackEvents();
         renderTidePanel(events);
         renderWaypoints(events);
-        // Show demo notice
         const notice = document.createElement("div");
         notice.className = "tide-note";
         notice.style.marginTop = "0.5rem";

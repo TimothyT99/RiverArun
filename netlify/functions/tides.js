@@ -4,7 +4,7 @@ exports.handler = async function (event) {
     return { statusCode: 500, body: JSON.stringify({ error: "API key not configured" }) };
   }
 
-  const stationId = event.queryStringParameters?.station || "0137A";
+  const stationId = event.queryStringParameters?.station || "0074";
   const url = `https://admiraltyapi.azure-api.net/uktidalapi/api/V1/Stations/${encodeURIComponent(stationId)}/TidalEvents?duration=1`;
 
   try {
