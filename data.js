@@ -116,12 +116,12 @@ const WAYPOINTS = [
     ]
   },
   {
-    name: "Pulborough Swan Bridge",
-    lag_mins: 210,
-    lag_confirmed: false,
+    name: "Pulborough",
+    lag_mins: 240,
+    lag_confirmed: true,
     zone: "fresh",
     springs_only: false,
-    note: "Approximate lag — interpolated. Normal tidal limit on average tides. On extreme neaps there may be no tidal influence at all above here. Public slipway on north bank adjacent to tea rooms.",
+    note: "Normal tidal limit on average tides. On extreme neaps there may be no tidal influence at all. HW is 4 hours after Littlehampton — flood reaches here in ~4hrs, ebb takes ~8hrs and the river is very slow to fall. Public slipway on north bank adjacent to tea rooms.",
     access: [
       {
         venue: "Macklins @ The Riverside (formerly Corn Store)",
@@ -130,15 +130,6 @@ const WAYPOINTS = [
         note: "Tea room and antiques emporium at the Old Corn Store, Swan Bridge. Name changed — Macklins @ The Riverside per food hygiene register March 2025, 5-star rating."
       }
     ]
-  },
-  {
-    name: "Pulborough (A29 bridge)",
-    lag_mins: 240,
-    lag_confirmed: true,
-    zone: "fresh",
-    springs_only: false,
-    note: "HW is 4 hours after Littlehampton. Flood reaches here in ~4hrs; ebb takes ~8hrs — the river is very slow to fall after high water. On springs the tide arrives earlier and runs more strongly than on neaps.",
-    access: null
   },
   {
     name: "White Hart, Stopham Bridge",
