@@ -331,6 +331,47 @@ main {
   text-decoration: none;
 }
 
+.access-item.closed {
+  opacity: 0.55;
+}
+
+.access-item.closed .venue {
+  color: var(--text-muted);
+}
+
+.closed-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  background: #999;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.access-note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+  font-style: italic;
+}
+
+.waypoint-moorings {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--border);
+}
+
+.waypoint-moorings a {
+  color: var(--teal);
+  text-decoration: none;
+}
+
 .harbourmaster-flag {
   font-size: 0.75rem;
   color: var(--navy-light);

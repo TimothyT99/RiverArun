@@ -237,10 +237,11 @@
 
       let bodyHTML = "";
 
-      // Derived HW time
+      // Derived HW time — use lag_confirmed (new field) falling back to !interpolated
       if (refHW && wp.lag_mins !== null) {
         const derived = addMinutes(refHW.time, wp.lag_mins);
-        const approxLabel = wp.interpolated ? ' <span class="approx">(approx.)</span>' : "";
+        const isApprox = wp.hasOwnProperty("lag_confirmed") ? !wp.lag_confirmed : wp.interpolated;
+        const approxLabel = isApprox ? ' <span class="approx">(approx.)</span>' : "";
         bodyHTML += `<div class="waypoint-hw">HW ${formatTime(derived)}${approxLabel}</div>`;
       } else if (wp.lag_mins === null) {
         bodyHTML += `<div class="waypoint-hw" style="color:var(--amber)">No regular tidal time</div>`;
@@ -251,13 +252,31 @@
         bodyHTML += `<div class="waypoint-note">${wp.note}</div>`;
       }
 
-      // Access
+      // Access entries
       if (wp.access) {
         const items = Array.isArray(wp.access) ? wp.access : [wp.access];
         bodyHTML += `<div class="waypoint-access">`;
         items.forEach(a => {
-          bodyHTML += `<div class="access-item"><span class="venue">${a.venue}</span> <span class="phone"><a href="tel:${a.phone.replace(/\s/g, "")}">${a.phone}</a></span></div>`;
+          const isClosed = a.status === "closed";
+          bodyHTML += `<div class="access-item${isClosed ? " closed" : ""}">`;
+          bodyHTML += `<span class="venue">${a.venue}</span>`;
+          if (isClosed) {
+            bodyHTML += ` <span class="closed-badge">Closed</span>`;
+          } else if (a.phone) {
+            bodyHTML += ` <span class="phone"><a href="tel:${a.phone.replace(/\s/g, "")}">${a.phone}</a></span>`;
+          }
+          if (a.note && isClosed) {
+            bodyHTML += `<div class="access-note">${a.note}</div>`;
+          }
+          bodyHTML += `</div>`;
         });
+        bodyHTML += `</div>`;
+      }
+
+      // Moorings contact (Arundel etc.)
+      if (wp.moorings) {
+        bodyHTML += `<div class="waypoint-moorings">Moorings: ${wp.moorings.owner}`;
+        if (wp.moorings.phone) bodyHTML += ` <a href="tel:${wp.moorings.phone.replace(/\s/g, "")}">${wp.moorings.phone}</a>`;
         bodyHTML += `</div>`;
       }
 
@@ -272,40 +291,23 @@
 
   function renderReference() {
     const grid = document.getElementById("reference-grid");
-    const cards = [
-      {
-        title: "Tidal range",
-        body: `<p>Springs: <span class="stat">5.5m</span> (MHWS 5.9m / MLWS 0.4m)<br>Neaps: <span class="stat">2.7m</span> (MHWN 4.4m / MLWN 1.7m)</p>`
-      },
-      {
-        title: "Flood vs ebb asymmetry",
-        body: `<p>Flood <span class="stat">~4 hrs</span>, ebb <span class="stat">~8 hrs</span>. One of the fastest rivers in the UK \u2014 currently described as the second fastest flowing. Spring ebb at the mouth reaches <span class="warning">6.5 kts</span>.</p>`
-      },
-      {
-        title: "Entrance bar",
-        body: `<p>Bar sits <span class="stat">0.9m above chart datum</span>. Depth over bar = tide gauge reading minus 0.9m. Minimum <span class="stat">3.4m on gauge</span> from HW\u22122.5 to HW+3.</p>`
-      },
-      {
-        title: "Rainfall & freshwater",
-        body: `<p>Heavy rainfall suppresses tidal penetration upstream, can push the effective tidal limit back downstream, and advances the turn of the tide. Most significant above Amberley. <span class="warning">All lag times assume normal river levels.</span></p>`
-      },
-      {
-        title: "Salt wedge / opposing currents",
-        body: `<p>Between Arundel and Amberley around slack tide: saltwater continues pushing upstream along the riverbed while freshwater flows seaward on the surface. Opposing currents visible in surface turbulence even when main flow appears slack.</p>`
-      },
-      {
-        title: "Springs vs neaps",
-        body: `<p>Spring range is <span class="stat">2\u00d7 neap range</span>. On extreme neaps no tidal influence above Pulborough. Springs required for Stopham and Pallingham. <span class="warning">Spring tides arrive earlier and run more strongly than neap predictions \u2014 lag times are approximate.</span></p>`
-      }
-    ];
-
     grid.innerHTML = "";
-    cards.forEach(c => {
+
+    // Use MODIFYING_FACTORS from data.js if available, else skip
+    if (typeof MODIFYING_FACTORS === "undefined") return;
+
+    MODIFYING_FACTORS.forEach(factor => {
       const div = document.createElement("div");
       div.className = "ref-card";
-      div.innerHTML = `<h3>${c.title}</h3>${c.body}`;
+      div.innerHTML = `<h3>${factor.title}</h3><p>${factor.body}</p>`;
       grid.appendChild(div);
     });
+
+    // Wire up disclaimer from data.js
+    if (typeof DISCLAIMER !== "undefined") {
+      const el = document.getElementById("footer-disclaimer");
+      if (el) el.textContent = DISCLAIMER;
+    }
   }
 
   // ── Fallback / demo mode ──
