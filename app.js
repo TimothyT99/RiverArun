@@ -8,6 +8,13 @@
 
   // ── Helpers ──
 
+  function tzAbbr() {
+    // Detect whether the browser is currently in BST or GMT
+    const parts = new Intl.DateTimeFormat("en-GB", { timeZoneName: "short" }).formatToParts(new Date());
+    const tz = parts.find(p => p.type === "timeZoneName");
+    return tz ? tz.value : "";
+  }
+
   function formatTime(date) {
     return date.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
   }
@@ -131,8 +138,9 @@
     const container = document.getElementById("tide-panel-body");
     const now = new Date();
 
-    // Date
-    document.getElementById("tide-date").textContent = formatDate(now);
+    // Date and timezone
+    const tz = tzAbbr();
+    document.getElementById("tide-date").textContent = formatDate(now) + (tz ? ` (${tz})` : "");
 
     // Tide state
     const state = getTideState(events, now);

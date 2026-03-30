@@ -56,22 +56,13 @@ const WAYPOINTS = [
     ]
   },
   {
-    name: "Pulborough Swan Bridge",
-    lag_mins: 210,
-    zone: "fresh",
-    interpolated: true,
-    springs_only: false,
-    note: "Normal tidal limit on average tides. On extreme neaps no tidal influence at all. Public slipway on north bank adjacent to tea rooms.",
-    access: { venue: "Corn Store & Tea Rooms", phone: "01798 875067" }
-  },
-  {
-    name: "Pulborough (A29 bridge)",
+    name: "Pulborough",
     lag_mins: 240,
     zone: "fresh",
     interpolated: false,
     springs_only: false,
-    note: "4 hours after Littlehampton HW. Flood reaches here in ~4 hrs; ebb takes ~8 hrs. Very slow to fall.",
-    access: null
+    note: "Normal tidal limit on average tides. On extreme neaps no tidal influence at all. Flood reaches here in ~4 hrs; ebb takes ~8 hrs \u2014 very slow to fall. Public slipway on north bank adjacent to tea rooms.",
+    access: { venue: "Corn Store & Tea Rooms", phone: "01798 875067" }
   },
   {
     name: "White Hart, Stopham Bridge",
